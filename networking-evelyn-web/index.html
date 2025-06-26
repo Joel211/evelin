@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Evelin14 - Marketing Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos Generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: #ffffff;
+            color: #333333;
+            scroll-behavior: smooth;
+        }
+
+        /* Encabezado Principal */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #333333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -8px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #333333;
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Botón de WhatsApp Mejorado */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #25d366 0%, #20b558 100%);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            animation: pulse 3s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Sección Principal - Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sección de Servicios */
+        .services {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f7fafc 0%, #e6fffa 100%);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .service-card:hover .service-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Sección Sobre Nosotros */
+        .about {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .about-text p {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(236, 72, 153, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-placeholder {
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Galería - Marcas */
+        .brands-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            overflow: hidden;
+        }
+
+        .brands-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .brands-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .title-underline {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .brands-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .brands-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .brand-slide {
+            min-width: 200px;
+            height: 120px;
+            margin: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border: 1px solid rgba(245, 158, 11, 0.1);
+        }
+
+        .brand-slide img {
+            max-width: 100%;
+            max-height: 80px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .brand-slide:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Sección de Planes */
+        .plans {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .plan-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .plan-card.featured {
+            border: 2px solid #22c55e;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .plan-card.featured::before {
+            content: 'MÁS POPULAR';
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(34, 197, 94, 0.15);
+        }
+
+        .plan-card.featured:hover {
+            transform: scale(1.05) translateY(-15px);
+        }
+
+        .plan-header {
+            margin-bottom: 2.5rem;
+            padding-top: 2rem;
+        }
+
+        .plan-name {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-price span {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .plan-description {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 3rem;
+        }
+
+        .plan-features li {
+            padding: 1rem 0;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .plan-features li i {
+            color: #22c55e;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .plan-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .plan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Sección de Contacto */
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-method {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-method:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .contact-method i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-method h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .contact-method p {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Mapa de Google */
+        .map-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .map-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .map-subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .map-embed {
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            width: 100%;
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Página de Servicio Individual */
+        .service-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .service-hero {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .service-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .service-hero .service-icon-large {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .service-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .service-details {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f7fafc 0%, #e6fffa 100%);
+        }
+
+        .service-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .service-intro p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features-section {
+            margin: 4rem 0;
+        }
+
+        .features-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .benefits-section {
+            margin: 4rem 0;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .benefit-item i {
+            color: #22c55e;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            min-width: 30px;
+        }
+
+        .process-section {
+            margin: 4rem 0;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .process-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+        }
+
+        .process-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .service-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 25px;
+        }
+
+        .service-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .service-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .service-cta-btn {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Pie de Página */
+        .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            margin-bottom: 3rem;
+        }
+
+        .footer-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-info p {
+            color: #d1d5db;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: #d1d5db;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-links a.facebook:hover {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-links a.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-links a.tiktok:hover {
+            background: #000000;
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Diseño Responsivo */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .services-grid,
+            .plans-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-card.featured {
+                transform: none;
+            }
+
+            .plan-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .whatsapp-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .map-embed {
+                height: 300px;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-links a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .plan-price {
+                font-size: 2.5rem;
+            }
+
+            .map-embed {
+                height: 250px;
+            }
+
+            .service-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .service-hero .service-icon-large {
+                font-size: 3rem;
+            }
+
+            .features-grid,
+            .benefits-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado Principal -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Networking Evelin14</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Nuestros Servicios</a></li>
+                <li><a href="#nosotros">Sobre Nosotros</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#contacto">Contactos</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Principal - Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Impulsa tu Marca Digital</h1>
+            <p>Estrategias de marketing innovadoras que conectan tu negocio con el éxito. Transformamos ideas en resultados medibles y experiencias digitales únicas.</p>
+            <a href="#contacto" class="cta-button">Comenzar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Soluciones digitales completas para hacer crecer tu negocio</p>
+            <div class="services-grid">
+                <div class="service-card" onclick="openServicePage('marketing')">
+                    <i class="fas fa-bullhorn service-icon"></i>
+                    <h3>Marketing Digital</h3>
+                    <p>Estrategias completas de marketing digital que aumentan tu presencia online y generan más conversiones para tu negocio.</p>
+                    <button class="service-btn">Ver Detalles</button>
+                </div>
+                <div class="service-card" onclick="openServicePage('social')">
+                    <i class="fas fa-share-alt service-icon"></i>
+                    <h3>Redes Sociales</h3>
+                    <p>Gestión profesional de redes sociales que construye comunidades activas y comprometidas alrededor de tu marca.</p>
+                    <button class="service-btn">Ver Detalles</button>
+                </div>
+                <div class="service-card" onclick="openServicePage('web')">
+                    <i class="fas fa-globe service-icon"></i>
+                    <h3>Páginas Web</h3>
+                    <p>Desarrollo de sitios web modernos, responsivos y optimizados que convierten visitantes en clientes.</p>
+                    <button class="service-btn">Ver Detalles</button>
+                </div>
+                <div class="service-card" onclick="openServicePage('mobile')">
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h3>Aplicaciones Móviles</h3>
+                    <p>Apps nativas e híbridas para iOS y Android que mejoran la experiencia de tus usuarios.</p>
+                    <button class="service-btn">Ver Detalles</button>
+                </div>
+                <div class="service-card" onclick="openServicePage('webapp')">
+                    <i class="fas fa-laptop-code service-icon"></i>
+                    <h3>Aplicaciones Web</h3>
+                    <p>Sistemas web personalizados que automatizan procesos y optimizan la gestión de tu negocio.</p>
+                    <button class="service-btn">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <section id="nosotros" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre Networking Evelin14</h2>
+                    <p>Somos una agencia de marketing digital especializada en crear conexiones auténticas entre marcas y audiencias. Con años de experiencia en el sector, hemos ayudado a cientos de empresas a alcanzar sus objetivos digitales.</p>
+                    <p>Nuestro enfoque se basa en la innovación, la creatividad y los resultados medibles. Cada proyecto es una oportunidad para superar expectativas y crear valor real para nuestros clientes.</p>
+                    <p>Creemos en el poder del networking digital para transformar negocios y crear oportunidades únicas de crecimiento sostenible.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Clientes Satisfechos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Proyectos Completados</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Años de Experiencia</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Soporte Disponible</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-network-wired about-placeholder"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería - Marcas que trabajan con nosotros -->
+    <section id="galeria" class="brands-section">
+        <div class="container">
+            <div class="brands-header">
+                <h2 class="brands-title">Marcas que Trabajan con Nosotros</h2>
+                <div class="title-underline"></div>
+            </div>
+            <div class="brands-carousel">
+                <div class="brands-track">
+                    <div class="brand-slide">
+                        <img src="marca1.jpg" alt="Marca 1" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca2.jpg" alt="Marca 2" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca3.jpg" alt="Marca 3" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca4.jpg" alt="Marca 4" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca5.jpg" alt="Marca 5" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca6.jpg" alt="Marca 6" />
+                    </div>
+                    <!-- Duplicamos las imágenes para loop infinito -->
+                    <div class="brand-slide">
+                        <img src="marca1.jpg" alt="Marca 1" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca2.jpg" alt="Marca 2" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca3.jpg" alt="Marca 3" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca4.jpg" alt="Marca 4" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca5.jpg" alt="Marca 5" />
+                    </div>
+                    <div class="brand-slide">
+                        <img src="marca6.jpg" alt="Marca 6" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Planes -->
+    <section id="planes" class="plans">
+        <div class="container">
+            <h2 class="section-title">Nuestros Planes</h2>
+            <p class="section-subtitle">Elige el plan perfecto para impulsar tu negocio al siguiente nivel</p>
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">$299<span>/mes</span></div>
+                        <p class="plan-description">Perfecto para pequeños negocios que inician su presencia digital</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i>Gestión de 2 redes sociales</li>
+                        <li><i class="fas fa-check"></i>10 publicaciones mensuales</li>
+                        <li><i class="fas fa-check"></i>Diseño básico de contenido</li>
+                        <li><i class="fas fa-check"></i>Reporte mensual básico</li>
+                        <li><i class="fas fa-check"></i>Soporte por email</li>
+                    </ul>
+                    <a href="#" class="plan-btn" onclick="selectPlan('Starter')">Elegir Plan</a>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">$599<span>/mes</span></div>
+                        <p class="plan-description">La opción más popular para empresas en crecimiento</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i>Gestión de 4 redes sociales</li>
+                        <li><i class="fas fa-check"></i>20 publicaciones mensuales</li>
+                        <li><i class="fas fa-check"></i>Diseño profesional de contenido</li>
+                        <li><i class="fas fa-check"></i>Estrategia SEO básica</li>
+                        <li><i class="fas fa-check"></i>Campañas publicitarias</li>
+                        <li><i class="fas fa-check"></i>Reporte detallado semanal</li>
+                        <li><i class="fas fa-check"></i>Soporte prioritario</li>
+                    </ul>
+                    <a href="#" class="plan-btn" onclick="selectPlan('Professional')">Elegir Plan</a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">$999<span>/mes</span></div>
+                        <p class="plan-description">Solución completa para grandes empresas</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i>Gestión ilimitada de redes</li>
+                        <li><i class="fas fa-check"></i>Contenido ilimitado</li>
+                        <li><i class="fas fa-check"></i>Diseño premium personalizado</li>
+                        <li><i class="fas fa-check"></i>Estrategia SEO avanzada</li>
+                        <li><i class="fas fa-check"></i>Campañas multi-plataforma</li>
+                        <li><i class="fas fa-check"></i>Analítica avanzada</li>
+                        <li><i class="fas fa-check"></i>Account Manager dedicado</li>
+                        <li><i class="fas fa-check"></i>Consultoría estratégica</li>
+                    </ul>
+                    <a href="#" class="plan-btn" onclick="selectPlan('Enterprise')">Elegir Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Conecta con Nosotros</h2>
+                <p class="section-subtitle">¿Listo para llevar tu negocio al siguiente nivel? Elige cómo prefieres contactarnos</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-method" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>Chatea con nosotros en tiempo real y obtén respuestas inmediatas a tus consultas.</p>
+                        <a href="#" class="contact-btn">Enviar Mensaje</a>
+                    </div>
+                    
+                    <div class="contact-method" onclick="sendEmail()">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>Envíanos un correo detallado y te responderemos en menos de 24 horas.</p>
+                        <a href="#" class="contact-btn">Enviar Email</a>
+                    </div>
+                    
+                    <div class="contact-method" onclick="makeCall()">
+                        <i class="fas fa-phone"></i>
+                        <h3>Llamada</h3>
+                        <p>Habla directamente con nuestro equipo para una consulta personalizada.</p>
+                        <a href="#" class="contact-btn">Llamar Ahora</a>
+                    </div>
+    </section>
+
+    <!-- Sección de Ubicación con Google Maps -->
+    <section class="map-section">
+        <div class="map-container">
+            <h2 class="map-title">Nuestra Ubicación</h2>
+            <p class="map-subtitle">Visítanos en nuestra oficina o programa una reunión virtual</p>
+            <div class="map-embed">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31911.36094534604!2d-78.12447892089844!3d0.35471979999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2a42c4b5ddc72f%3A0x6e1c5e2b8a7c3d9f!2sIbarra%2C%20Ecuador!5e0!3m2!1ses!2sec!4v1640000000000!5m2!1ses!2sec"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Página de Servicio Individual (oculta inicialmente) -->
+    <div id="servicePage" class="service-page" style="display: none;">
+        <header class="service-header">
+            <div class="container">
+                <button class="back-btn" onclick="backToHome()">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </button>
+                <div class="service-hero" id="serviceHero">
+                    <!-- Contenido dinámico del servicio -->
+                </div>
+            </div>
+        </header>
+        
+        <section class="service-details">
+            <div class="container" id="serviceContent">
+                <!-- Contenido detallado del servicio -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Botón de WhatsApp Flotante -->
+    <a href="#" class="whatsapp-btn" onclick="openWhatsApp()" title="Contáctanos por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Pie de Página -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Networking Evelin14</h3>
+                <p>Transformamos ideas en resultados digitales. Conectamos marcas con audiencias a través de estrategias innovadoras de marketing digital que generan crecimiento sostenible.</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://facebook.com/networkingevelin14" class="facebook" target="_blank" title="Síguenos en Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://instagram.com/networkingevelin14" class="instagram" target="_blank" title="Síguenos en Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://tiktok.com/@networkingevelin14" class="tiktok" target="_blank" title="Síguenos en TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Networking Evelin14. Todos los derechos reservados.</p>
+                <p>📍 Ibarra, Imbabura, Ecuador | 📱 +593 99 102 1490</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los servicios
+        const serviciosData = {
+            marketing: {
+                title: 'Marketing Digital',
+                icon: 'fas fa-bullhorn',
+                hero: 'Potencia tu presencia digital con estrategias que realmente funcionan',
+                description: 'Desarrollamos estrategias de marketing digital integrales que combinan SEO, SEM, email marketing, marketing de contenidos y automatización para maximizar el alcance de tu marca y generar conversiones reales.',
+                features: [
+                    {
+                        title: 'SEO y Posicionamiento',
+                        desc: 'Optimización para motores de búsqueda que lleva tu sitio a los primeros resultados de Google.',
+                        icon: 'fas fa-search'
+                    },
+                    {
+                        title: 'Publicidad Digital (SEM)',
+                        desc: 'Campañas publicitarias en Google Ads y redes sociales con ROI medible y optimizado.',
+                        icon: 'fas fa-bullseye'
+                    },
+                    {
+                        title: 'Email Marketing',
+                        desc: 'Campañas automatizadas que nutren leads y convierten prospectos en clientes leales.',
+                        icon: 'fas fa-envelope'
+                    },
+                    {
+                        title: 'Marketing de Contenidos',
+                        desc: 'Contenido valioso que educa, entretiene y convierte a tu audiencia objetivo.',
+                        icon: 'fas fa-pen-nib'
+                    }
+                ],
+                benefits: [
+                    'Aumento del 300% en leads cualificados',
+                    'ROI promedio de 4:1 en campañas publicitarias',
+                    'Posicionamiento en top 3 de Google',
+                    'Incremento del 250% en reconocimiento de marca'
+                ],
+                process: [
+                    'Auditoría digital completa de tu negocio',
+                    'Desarrollo de estrategia personalizada',
+                    'Implementación y lanzamiento de campañas',
+                    'Monitoreo, análisis y optimización continua'
+                ]
+            },
+            social: {
+                title: 'Redes Sociales',
+                icon: 'fas fa-share-alt',
+                hero: 'Construye comunidades leales que impulsen tu crecimiento',
+                description: 'Gestionamos y optimizamos tu presencia en redes sociales creando contenido atractivo, construyendo comunidades activas y ejecutando campañas publicitarias que generan engagement real y conversiones.',
+                features: [
+                    {
+                        title: 'Gestión de Contenido',
+                        desc: 'Creación y programación de contenido atractivo para todas las plataformas sociales.',
+                        icon: 'fas fa-calendar-alt'
+                    },
+                    {
+                        title: 'Community Management',
+                        desc: 'Gestión activa de comunidades que fomenta la participación y el engagement.',
+                        icon: 'fas fa-users'
+                    },
+                    {
+                        title: 'Publicidad en Redes',
+                        desc: 'Campañas publicitarias segmentadas en Facebook, Instagram, TikTok y LinkedIn.',
+                        icon: 'fas fa-ad'
+                    },
+                    {
+                        title: 'Influencer Marketing',
+                        desc: 'Colaboraciones estratégicas con influencers que amplifican tu mensaje.',
+                        icon: 'fas fa-star'
+                    }
+                ],
+                benefits: [
+                    'Crecimiento orgánico del 400% en seguidores',
+                    'Engagement rate superior al 8%',
+                    'Aumento del 350% en tráfico web desde redes',
+                    'Generación de 200+ leads mensuales'
+                ],
+                process: [
+                    'Análisis de audiencia y competencia',
+                    'Estrategia de contenido personalizada',
+                    'Creación y programación de contenido',
+                    'Monitoreo y optimización del engagement'
+                ]
+            },
+            web: {
+                title: 'Páginas Web',
+                icon: 'fas fa-globe',
+                hero: 'Sitios web que convierten visitantes en clientes',
+                description: 'Desarrollamos sitios web modernos, responsivos y optimizados para conversiones. Desde páginas corporativas hasta e-commerce, creamos experiencias digitales que reflejan tu marca y generan resultados.',
+                features: [
+                    {
+                        title: 'Diseño Responsivo',
+                        desc: 'Sitios web que se adaptan perfectamente a todos los dispositivos y pantallas.',
+                        icon: 'fas fa-mobile-alt'
+                    },
+                    {
+                        title: 'Optimización SEO',
+                        desc: 'Estructura y contenido optimizados para posicionamiento en buscadores.',
+                        icon: 'fas fa-search-plus'
+                    },
+                    {
+                        title: 'E-commerce',
+                        desc: 'Tiendas online completas con pasarelas de pago y gestión de inventario.',
+                        icon: 'fas fa-shopping-cart'
+                    },
+                    {
+                        title: 'CMS Personalizado',
+                        desc: 'Sistemas de gestión de contenido fáciles de usar y actualizar.',
+                        icon: 'fas fa-edit'
+                    }
+                ],
+                benefits: [
+                    'Aumento del 500% en tiempo de permanencia',
+                    'Tasa de conversión superior al 15%',
+                    'Carga 3x más rápida que sitios tradicionales',
+                    'Posicionamiento en primeras páginas de Google'
+                ],
+                process: [
+                    'Análisis de requisitos y objetivos',
+                    'Diseño UX/UI y prototipado',
+                    'Desarrollo y programación',
+                    'Testing, lanzamiento y mantenimiento'
+                ]
+            },
+            mobile: {
+                title: 'Aplicaciones Móviles',
+                icon: 'fas fa-mobile-alt',
+                hero: 'Apps que conectan tu negocio con tus clientes 24/7',
+                description: 'Desarrollamos aplicaciones móviles nativas e híbridas para iOS y Android que mejoran la experiencia del usuario, aumentan la fidelización y abren nuevos canales de ingresos para tu negocio.',
+                features: [
+                    {
+                        title: 'Apps Nativas',
+                        desc: 'Aplicaciones optimizadas específicamente para iOS y Android con máximo rendimiento.',
+                        icon: 'fas fa-code'
+                    },
+                    {
+                        title: 'Apps Híbridas',
+                        desc: 'Desarrollo multiplataforma que reduce costos y tiempo de desarrollo.',
+                        icon: 'fas fa-layer-group'
+                    },
+                    {
+                        title: 'UX/UI Móvil',
+                        desc: 'Interfaces intuitivas diseñadas específicamente para dispositivos móviles.',
+                        icon: 'fas fa-palette'
+                    },
+                    {
+                        title: 'Integración API',
+                        desc: 'Conexión con sistemas existentes y servicios de terceros.',
+                        icon: 'fas fa-plug'
+                    }
+                ],
+                benefits: [
+                    'Aumento del 80% en engagement del usuario',
+                    'Retención de usuarios superior al 70%',
+                    'Nuevo canal de ventas 24/7',
+                    'Mejora del 60% en satisfacción del cliente'
+                ],
+                process: [
+                    'Conceptualización y análisis de mercado',
+                    'Diseño de experiencia de usuario (UX/UI)',
+                    'Desarrollo y programación de la app',
+                    'Testing, publicación en stores y soporte'
+                ]
+            },
+            webapp: {
+                title: 'Aplicaciones Web',
+                icon: 'fas fa-laptop-code',
+                hero: 'Sistemas web que automatizan y optimizan tu negocio',
+                description: 'Creamos aplicaciones web personalizadas que automatizan procesos empresariales, mejoran la productividad y proporcionan herramientas específicas para las necesidades únicas de tu negocio.',
+                features: [
+                    {
+                        title: 'Sistemas CRM',
+                        desc: 'Gestión completa de relaciones con clientes y pipeline de ventas.',
+                        icon: 'fas fa-users-cog'
+                    },
+                    {
+                        title: 'ERP Empresarial',
+                        desc: 'Sistemas de gestión empresarial que integran todos los procesos.',
+                        icon: 'fas fa-chart-network'
+                    },
+                    {
+                        title: 'Dashboards Analíticos',
+                        desc: 'Paneles de control con métricas e insights en tiempo real.',
+                        icon: 'fas fa-chart-line'
+                    },
+                    {
+                        title: 'Automatización',
+                        desc: 'Workflows automatizados que reducen tareas manuales y errores.',
+                        icon: 'fas fa-robot'
+                    }
+                ],
+                benefits: [
+                    'Reducción del 70% en tareas manuales',
+                    'Aumento del 50% en productividad',
+                    'ROI del 300% en primer año',
+                    'Centralización de datos y procesos'
+                ],
+                process: [
+                    'Análisis de procesos y requerimientos',
+                    'Arquitectura y diseño del sistema',
+                    'Desarrollo y implementación',
+                    'Capacitación, deployment y soporte continuo'
+                ]
+            }
+        };
+
+        // Función para abrir página de servicio
+        function openServicePage(serviceType) {
+            const service = serviciosData[serviceType];
+            
+            document.querySelector('body').style.overflow = 'hidden';
+            document.getElementById('servicePage').style.display = 'block';
+            
+            document.getElementById('serviceHero').innerHTML = `
+                <i class="${service.icon} service-icon-large"></i>
+                <h1>${service.title}</h1>
+                <p>${service.hero}</p>
+            `;
+            
+            document.getElementById('serviceContent').innerHTML = `
+                <div class="service-intro">
+                    <p>${service.description}</p>
+                </div>
+
+                <div class="features-section">
+                    <h2 class="features-title">¿Qué Incluye Este Servicio?</h2>
+                    <div class="features-grid">
+                        ${service.features.map(feature => `
+                            <div class="feature-card">
+                                <i class="${feature.icon} feature-icon"></i>
+                                <h3>${feature.title}</h3>
+                                <p>${feature.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h2 class="features-title">Beneficios Comprobados</h2>
+                    <div class="benefits-grid">
+                        ${service.benefits.map(benefit => `
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>${benefit}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="process-section">
+                    <h2 class="features-title">Nuestro Proceso de Trabajo</h2>
+                    <div class="process-grid">
+                        ${service.process.map((step, index) => `
+                            <div class="process-item">
+                                <div class="process-number">${index + 1}</div>
+                                <h4>Paso ${index + 1}</h4>
+                                <p>${step}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="service-cta">
+                    <h2>¿Listo para Empezar?</h2>
+                    <p>Contacta con nosotros y descubre cómo podemos transformar tu ${service.title.toLowerCase()}</p>
+                    <div class="cta-buttons">
+                        <a href="https://wa.me/593991021490?text=¡Hola! Estoy interesado en el servicio de ${service.title}. ¿Podrían brindarme más información y un presupuesto?" target="_blank" class="service-cta-btn">
+                            <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                        </a>
+                        <a href="mailto:info@networkingevelin14.com?subject=Consulta sobre ${service.title}" class="service-cta-btn">
+                            <i class="fas fa-envelope"></i> Enviar Email
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('servicePage').scrollTop = 0;
+        }
+
+        // Función para volver al inicio
+        function backToHome() {
+            document.getElementById('servicePage').style.display = 'none';
+            document.querySelector('body').style.overflow = 'auto';
+        }
+
+        // Función para el menú móvil
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Función de WhatsApp
+        function openWhatsApp() {
+            const message = "¡Hola! Me interesa conocer más sobre sus servicios de marketing digital. ¿Podrían brindarme más información?";
+            const phoneNumber = "593991021490";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Función para seleccionar planes
+        function selectPlan(planName) {
+            const message = `¡Hola! Estoy interesado en el plan ${planName}. ¿Podrían brindarme más información y ayudarme con la contratación?`;
+            const phoneNumber = "593991021490";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Funciones de contacto
+        function sendEmail() {
+            const subject = "Consulta sobre servicios de marketing digital";
+            const body = "Hola Networking Evelin14,\n\nMe interesa conocer más sobre sus servicios de marketing digital. Por favor, contactenme para discutir mi proyecto.\n\nGracias.";
+            const email = "info@networkingevelin14.com";
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function makeCall() {
+            const phoneNumber = "+593991021490";
+            window.location.href = `tel:${phoneNumber}`;
+        }
+
+        function scheduleVisit() {
+            const message = "¡Hola! Me gustaría agendar una reunión para discutir mis necesidades de marketing digital. ¿Cuándo tendrían disponibilidad?";
+            const phoneNumber = "593991021490";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+
+        // Efecto de header al hacer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.backdropFilter = 'blur(25px)';
+                header.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animaciones con Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animaciones
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observar tarjetas de servicios
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = `all 0.8s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Observar tarjetas de planes
+            document.querySelectorAll('.plan-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = `all 0.8s ease ${index * 0.15}s`;
+                observer.observe(card);
+            });
+
+            // Observar métodos de contacto
+            document.querySelectorAll('.contact-method').forEach((method, index) => {
+                method.style.opacity = '0';
+                method.style.transform = 'translateY(30px)';
+                method.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                observer.observe(method);
+            });
+
+            // Observar estadísticas
+            document.querySelectorAll('.stat-item').forEach((stat, index) => {
+                stat.style.opacity = '0';
+                stat.style.transform = 'translateY(30px)';
+                stat.style.transition = `all 0.6s ease ${index * 0.1}s`;
+                observer.observe(stat);
+            });
+        });
+
+        // Contador animado para estadísticas
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            
+            counters.forEach(counter => {
+                const target = counter.textContent.replace('+', '').replace('/', '');
+                const isNumeric = !isNaN(target);
+                
+                if (isNumeric) {
+                    const targetNumber = parseInt(target);
+                    const increment = targetNumber / 50;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= targetNumber) {
+                            counter.textContent = targetNumber + '+';
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current) + '+';
+                        }
+                    }, 30);
+                }
+            });
+        }
+
+        // Observar sección de estadísticas
+        const statsSection = document.querySelector('.about-stats');
+        if (statsSection) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statsObserver.observe(statsSection);
+        }
+
+        // Cerrar página de servicio con ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const servicePage = document.getElementById('servicePage');
+                if (servicePage.style.display === 'block') {
+                    backToHome();
+                }
+            }
+        });
+
+        // Prevenir clics en enlaces de contacto
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+
+        // Inicialización
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
