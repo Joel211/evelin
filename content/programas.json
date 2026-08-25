@@ -3,19 +3,29 @@
     {
       "nombre": "Taekwondo",
       "etiqueta": "Desde 4 años",
-      "descripcion": "Técnica, grados y valores para niños y jóvenes, en un ambiente familiar y seguro.",
+      "descripcion_corta": "Técnica, grados y valores para niños y jóvenes.",
+      "descripcion_larga": "Nuestro programa insignia. Los alumnos avanzan por grados y cinturones evaluados, desarrollando disciplina, respeto, confianza y defensa personal progresiva, en un ambiente familiar y seguro.",
       "foto": "/images/uploads/taekwondo.jpg"
     },
     {
       "nombre": "Kickboxing",
       "etiqueta": "Jóvenes y adultos",
-      "descripcion": "Condición física real, defensa personal y manejo del estrés con intensidad de club.",
+      "descripcion_corta": "Condición física real y defensa personal.",
+      "descripcion_larga": "Entrenamiento físico exigente, técnicas de artes marciales y manejo del estrés, con la intensidad de un club deportivo moderno.",
       "foto": "/images/uploads/kickboxing.jpg"
+    },
+    {
+      "nombre": "Ninja Warriors",
+      "etiqueta": "Retos y agilidad",
+      "descripcion_corta": "Circuitos de obstáculos y retos físicos.",
+      "descripcion_larga": "Actividades tipo Ninja Warrior que combinan agilidad, fuerza y trabajo en equipo, con retos progresivos adaptados a cada edad.",
+      "foto": "/images/uploads/ninja.jpg"
     },
     {
       "nombre": "Summer Camp",
       "etiqueta": "Vacacional",
-      "descripcion": "Taekwondo, retos ninja, juegos y trabajo en equipo durante las vacaciones.",
+      "descripcion_corta": "Taekwondo, juegos y retos en vacaciones.",
+      "descripcion_larga": "Taekwondo, actividades físicas, juegos, retos Ninja y trabajo en equipo durante las vacaciones, con formación en valores todos los días.",
       "foto": "/images/uploads/summer-camp.jpg"
     }
   ]
