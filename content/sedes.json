@@ -11,6 +11,12 @@
       "direccion": "Dirección de ejemplo, Cumbayá",
       "horario": "Lunes a viernes, horarios de ejemplo",
       "foto": "/images/uploads/sede-cumbaya.jpg"
+    },
+    {
+      "nombre": "quito",
+      "direccion": "hola",
+      "horario": "d",
+      "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2hiNZV7ZKfYk5pNR0DGQWFaqIH1Jrrh-ePBmVDyENc_TY7G5uA8SrWY9Y&s=10"
     }
   ]
 }
