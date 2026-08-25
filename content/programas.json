@@ -1,0 +1,22 @@
+{
+  "programas": [
+    {
+      "nombre": "Taekwondo",
+      "etiqueta": "Desde 4 años",
+      "descripcion": "Técnica, grados y valores para niños y jóvenes, en un ambiente familiar y seguro.",
+      "foto": "/images/uploads/taekwondo.jpg"
+    },
+    {
+      "nombre": "Kickboxing",
+      "etiqueta": "Jóvenes y adultos",
+      "descripcion": "Condición física real, defensa personal y manejo del estrés con intensidad de club.",
+      "foto": "/images/uploads/kickboxing.jpg"
+    },
+    {
+      "nombre": "Summer Camp",
+      "etiqueta": "Vacacional",
+      "descripcion": "Taekwondo, retos ninja, juegos y trabajo en equipo durante las vacaciones.",
+      "foto": "/images/uploads/summer-camp.jpg"
+    }
+  ]
+}

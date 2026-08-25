@@ -1,0 +1,74 @@
+# =====================================================
+# CONFIGURACIÓN DEL PANEL DE ADMINISTRACIÓN
+# Aquí defines EXACTAMENTE qué puede editar el cliente.
+# =====================================================
+
+# Usa autenticación clásica de DecapBridge (obligatorio)
+backend:
+  name: git-gateway
+  repo: Joel211/evelin
+  branch: main
+  identity_url: https://auth.decapbridge.com/sites/6e4294a1-d511-48a7-9925-d0539ca5053c
+  gateway_url: https://gateway.decapbridge.com
+  # Para ver quién hizo cada cambio (opcional)
+  commit_messages:
+    create: Crear {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> vía DecapBridge
+    update: Actualizar {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> vía DecapBridge
+    delete: Eliminar {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> vía DecapBridge
+    uploadMedia: Subir "{{path}}" - {{author-name}} <{{author-login}}> vía DecapBridge
+    deleteMedia: Eliminar "{{path}}" - {{author-name}} <{{author-login}}> vía DecapBridge
+    openAuthoring: Mensaje {{message}} - {{author-name}} <{{author-login}}> vía DecapBridge
+# Logo de Decap + Bridge (opcional)
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+# Enlace al sitio dentro del panel (opcional)
+site_url: https://dannyman.netlify.app
+
+media_folder: "images/uploads"   # carpeta donde se guardan las fotos que suba el cliente
+public_folder: "/images/uploads"
+
+collections:
+
+  - name: "sitio"
+    label: "Textos generales del sitio"
+    files:
+      - file: "content/sitio.json"
+        label: "Hero y WhatsApp"
+        name: "sitio"
+        fields:
+          - {label: "Título principal (hero)", name: "hero_titulo", widget: "string"}
+          - {label: "Subtítulo (hero)", name: "hero_subtitulo", widget: "text"}
+          - {label: "Número de WhatsApp (solo números, con código de país)", name: "whatsapp_numero", widget: "string"}
+          - {label: "Mensaje automático de WhatsApp", name: "whatsapp_mensaje_general", widget: "string"}
+
+  - name: "sedes"
+    label: "Sedes"
+    files:
+      - file: "content/sedes.json"
+        label: "Lista de sedes"
+        name: "sedes"
+        fields:
+          - label: "Sedes"
+            name: "sedes"
+            widget: "list"
+            fields:
+              - {label: "Nombre de la sede", name: "nombre", widget: "string"}
+              - {label: "Dirección", name: "direccion", widget: "string"}
+              - {label: "Horario", name: "horario", widget: "string"}
+              - {label: "Foto", name: "foto", widget: "image"}
+
+  - name: "programas"
+    label: "Programas"
+    files:
+      - file: "content/programas.json"
+        label: "Lista de programas"
+        name: "programas"
+        fields:
+          - label: "Programas"
+            name: "programas"
+            widget: "list"
+            fields:
+              - {label: "Nombre del programa", name: "nombre", widget: "string"}
+              - {label: "Etiqueta (ej. 'Desde 4 años')", name: "etiqueta", widget: "string"}
+              - {label: "Descripción", name: "descripcion", widget: "text"}
+              - {label: "Foto", name: "foto", widget: "image"}
+              

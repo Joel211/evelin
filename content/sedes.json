@@ -1,0 +1,16 @@
+{
+  "sedes": [
+    {
+      "nombre": "Valle de los Chillos",
+      "direccion": "Dirección de ejemplo, Valle de los Chillos",
+      "horario": "Lunes a viernes, horarios de ejemplo",
+      "foto": "/images/uploads/sede-chillos.jpg"
+    },
+    {
+      "nombre": "Cumbayá",
+      "direccion": "Dirección de ejemplo, Cumbayá",
+      "horario": "Lunes a viernes, horarios de ejemplo",
+      "foto": "/images/uploads/sede-cumbaya.jpg"
+    }
+  ]
+}
