@@ -115,9 +115,16 @@ fbq('track', 'PageView');
   .prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   @media(max-width:760px){.prog-grid{grid-template-columns:1fr;}}
   .prog-card{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--negro-2);}
-  .prog-toggle{display:block;width:100%;position:relative;aspect-ratio:4/3;text-align:left;}
-  .prog-toggle img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-  .prog-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top, rgba(13,13,12,.92) 15%, rgba(13,13,12,.15));}
+  .prog-toggle{display:block;width:100%;position:relative;aspect-ratio:4/3;text-align:left;overflow:hidden;}
+  .prog-toggle img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:filter .4s ease, transform .5s ease;}
+  .prog-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(to top, rgba(13,13,12,.92) 15%, rgba(13,13,12,.15));transition:opacity .35s ease;}
+  .prog-hover-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;opacity:0;transition:opacity .35s ease;}
+  .prog-hover-msg span{color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;font-size:.85rem;border:2px solid rgba(255,255,255,.8);border-radius:999px;padding:12px 22px;}
+  @media(hover:hover){
+    .prog-toggle:hover img{filter:blur(5px) brightness(.55);transform:scale(1.06);}
+    .prog-toggle:hover .prog-overlay{opacity:.35;}
+    .prog-toggle:hover .prog-hover-msg{opacity:1;}
+  }
   .prog-tag{align-self:flex-start;background:var(--rojo);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:10px;}
   .prog-overlay h3{color:#fff;font-family:var(--display);font-size:1.8rem;letter-spacing:.5px;}
   .prog-overlay p{color:var(--plata);font-size:.88rem;margin-top:4px;}
@@ -174,16 +181,35 @@ fbq('track', 'PageView');
   .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:.76rem;color:#767470;}
 
   /* ---------- WHATSAPP FLOTANTE ---------- */
-  .wa-flotante{position:fixed;bottom:22px;right:22px;z-index:200;}
-  #wa-flotante-boton{width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(37,211,102,.5);animation:pulso 2.6s infinite;}
-  #wa-flotante-boton svg{width:28px;height:28px;fill:#fff;}
+  .wa-flotante{position:fixed;bottom:22px;right:22px;z-index:200;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(37,211,102,.5);animation:pulso 2.6s infinite;transition:transform .2s ease;}
+  .wa-flotante:hover{transform:scale(1.08);}
+  .wa-flotante svg{width:28px;height:28px;fill:#fff;}
   @keyframes pulso{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55);}70%{box-shadow:0 0 0 16px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
-  #wa-flotante-menu{position:absolute;bottom:74px;right:0;background:#fff;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.2);padding:10px;display:none;min-width:220px;}
-  #wa-flotante-menu.abierto{display:block;}
-  #wa-flotante-menu .menu-titulo{font-size:.72rem;font-weight:800;text-transform:uppercase;color:#8a8780;padding:6px 10px;}
-  .wa-flotante-opcion{display:block;padding:11px 12px;border-radius:8px;font-weight:700;font-size:.9rem;color:var(--negro);}
-  .wa-flotante-opcion:hover{background:#F5F3EF;}
-  @media(prefers-reduced-motion: reduce){#wa-flotante-boton{animation:none;}html{scroll-behavior:auto;}}
+  @media(prefers-reduced-motion: reduce){.wa-flotante{animation:none;}html{scroll-behavior:auto;}}
+
+  /* ---------- ANIMACIONES DE ENTRADA (hero) ---------- */
+  @keyframes entrada{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  .hero-wordmark,.hero-sub,.hero-ctas{animation:entrada .8s cubic-bezier(.2,.7,.3,1) both;}
+  .hero-sub{animation-delay:.12s;}
+  .hero-ctas{animation-delay:.24s;}
+  @media(prefers-reduced-motion: reduce){.hero-wordmark,.hero-sub,.hero-ctas{animation:none;}}
+
+  /* ---------- NAV con sombra al hacer scroll ---------- */
+  header{transition:box-shadow .25s ease, background .25s ease;}
+  header.con-scroll{box-shadow:0 4px 24px rgba(0,0,0,.35);}
+
+  /* ---------- ZOOM DE IMÁGENES EN HOVER ---------- */
+  .sede-card{overflow:hidden;}
+  .sede-card img{transition:transform .6s cubic-bezier(.2,.7,.3,1);}
+  .sede-card:hover img{transform:scale(1.06);}
+  .galeria a{overflow:hidden;border-radius:8px;display:block;}
+  .galeria img{transition:transform .6s cubic-bezier(.2,.7,.3,1);}
+  .galeria a:hover img{transform:scale(1.08);}
+
+  /* ---------- BOTONES: elevación en hover ---------- */
+  .btn{transition:transform .18s ease, box-shadow .18s ease;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.18);}
+  .btn:active{transform:translateY(0) scale(.97);}
 
   .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;}
   .reveal.in{opacity:1;transform:translateY(0);}
@@ -212,7 +238,7 @@ fbq('track', 'PageView');
     <p class="hero-sub" data-campo="hero_subtitulo">Taekwondo • Kickboxing • Programas para niños y adultos</p>
     <div class="hero-ctas">
       <a href="#demo" class="btn btn-rojo btn-grande">Agenda tu clase gratis</a>
-      <a href="#" data-whatsapp data-origen="hero" class="btn btn-wa btn-grande" onclick="event.preventDefault(); document.getElementById('wa-flotante-menu').classList.add('abierto');">
+      <a href="#" id="hero-wa-btn" data-whatsapp data-origen="hero" class="btn btn-wa btn-grande">
         <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.1-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.8 14.6 3.3 13.3 3.3 12c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7-3.9 8.7-8.7 8.7z"/></svg>
         WhatsApp
       </a>
@@ -335,16 +361,10 @@ fbq('track', 'PageView');
   </div>
 </footer>
 
-<!-- ============ WHATSAPP FLOTANTE (elige sede) ============ -->
-<div class="wa-flotante">
-  <div id="wa-flotante-menu">
-    <div class="menu-titulo">Elige tu sede</div>
-    <div id="wa-flotante-lista"></div>
-  </div>
-  <button id="wa-flotante-boton" aria-label="Escribir por WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.1-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.8 14.6 3.3 13.3 3.3 12c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7-3.9 8.7-8.7 8.7z"/></svg>
-  </button>
-</div>
+<!-- ============ WHATSAPP FLOTANTE ============ -->
+<a href="#" id="wa-flotante-boton" class="wa-flotante" data-whatsapp data-origen="flotante" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.1-.5-.1-.1-.6-1.5-.9-2-.2-.5-.5-.4-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.8 14.6 3.3 13.3 3.3 12c0-4.8 3.9-8.7 8.7-8.7s8.7 3.9 8.7 8.7-3.9 8.7-8.7 8.7z"/></svg>
+</a>
 
 <script src="/js/analytics.js"></script>
 <script src="/js/cargar-contenido.js"></script>
@@ -353,6 +373,11 @@ fbq('track', 'PageView');
     entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('con-scroll', window.scrollY > 40);
+  });
 </script>
 
 </body>

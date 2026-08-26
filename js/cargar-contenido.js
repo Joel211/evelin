@@ -28,7 +28,13 @@ async function cargarContenido() {
     const diferenciaImg = document.getElementById('diferencia-imagen');
     if (diferenciaImg && sitio.diferencia_imagen) diferenciaImg.src = sitio.diferencia_imagen;
 
-    // ---- Redes sociales ----
+    // ---- WhatsApp general (hero, flotante, formulario) ----
+    const numeroGeneral = sitio.whatsapp_general;
+    const heroWaBtn = document.getElementById('hero-wa-btn');
+    if (heroWaBtn) heroWaBtn.href = waLink(numeroGeneral, 'Hola, necesito información sobre Danny Man Academy');
+    const flotanteBtn = document.getElementById('wa-flotante-boton');
+    if (flotanteBtn) flotanteBtn.href = waLink(numeroGeneral, 'Hola, necesito información sobre Danny Man Academy');
+    window._whatsappGeneral = numeroGeneral;
     document.querySelectorAll('[data-campo="instagram_url"]').forEach(el => el.href = sitio.instagram_url);
     document.querySelectorAll('[data-campo="facebook_url"]').forEach(el => el.href = sitio.facebook_url);
 
@@ -72,15 +78,6 @@ async function cargarContenido() {
       footerSedes.innerHTML = sedes.map(s => `<span>${s.nombre}</span>`).join('<span>|</span>');
     }
 
-    // Botones flotantes / nav que abren el WhatsApp de una sede específica
-    window._sedesWhatsapp = sedes.map(s => ({ nombre: s.nombre, numero: s.whatsapp_numero }));
-    const flotanteLista = document.getElementById('wa-flotante-lista');
-    if (flotanteLista) {
-      flotanteLista.innerHTML = sedes.map(s => `
-        <a href="${waLink(s.whatsapp_numero, 'Hola, quiero información sobre Danny Man Academy')}" data-whatsapp data-origen="flotante-${s.nombre}" class="wa-flotante-opcion">${s.nombre}</a>
-      `).join('');
-    }
-
     // ---- Programas (acordeón) ----
     const programas = programasData.programas;
     const programasContenedor = document.getElementById('programas-contenedor');
@@ -89,6 +86,7 @@ async function cargarContenido() {
         <div class="prog-card" data-index="${i}">
           <button class="prog-toggle" aria-expanded="false">
             <img src="${p.foto}" alt="${p.nombre}" loading="lazy">
+            <div class="prog-hover-msg"><span>Presiona para ver más información</span></div>
             <div class="prog-overlay">
               <span class="prog-tag">${p.etiqueta}</span>
               <h3>${p.nombre}</h3>
@@ -125,19 +123,7 @@ async function cargarContenido() {
 
 document.addEventListener('DOMContentLoaded', cargarContenido);
 
-// Botón flotante de WhatsApp: abre/cierra el mini menú de sedes
-document.addEventListener('DOMContentLoaded', () => {
-  const boton = document.getElementById('wa-flotante-boton');
-  const menu = document.getElementById('wa-flotante-menu');
-  if (boton && menu) {
-    boton.addEventListener('click', () => menu.classList.toggle('abierto'));
-    document.addEventListener('click', (e) => {
-      if (!menu.contains(e.target) && !boton.contains(e.target)) menu.classList.remove('abierto');
-    });
-  }
-});
-
-// Formulario de clase demo -> arma el mensaje y abre WhatsApp de la sede elegida
+// Formulario de clase demo -> arma el mensaje y abre WhatsApp del número general
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('demoForm');
   if (!form) return;
@@ -151,9 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const programa = document.getElementById('programa').value;
     const horario = document.getElementById('horario').value;
 
-    const sede = (window._sedesWhatsapp || []).find(s => s.nombre === sedeNombre);
-    const numero = sede ? sede.numero : '';
-
     const mensaje = `Hola, quiero agendar una clase demostrativa gratuita.
 Representante: ${representante}
 Alumno: ${alumno}
@@ -164,6 +147,6 @@ Programa de interés: ${programa}
 Horario preferido: ${horario}`;
 
     trackLead(sedeNombre, programa);
-    window.open(waLink(numero, mensaje), '_blank');
+    window.open(waLink(window._whatsappGeneral, mensaje), '_blank');
   });
 });

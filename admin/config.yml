@@ -32,6 +32,7 @@ collections:
         label: "Hero, diferencia y redes"
         name: "sitio"
         fields:
+          - {label: "Número de WhatsApp general (formulario y botón flotante)", name: "whatsapp_general", widget: "string"}
           - {label: "Foto de portada (hero)", name: "hero_imagen", widget: "image"}
           - {label: "Título principal (hero)", name: "hero_titulo", widget: "string"}
           - {label: "Subtítulo (hero)", name: "hero_subtitulo", widget: "string"}
