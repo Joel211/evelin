@@ -9,18 +9,34 @@ function waLink(numero, mensaje) {
 
 async function cargarContenido() {
   try {
-    const [sitio, sedesData, programasData, galeriaData] = await Promise.all([
+    const [sitio, sedesData, programasData, galeriaData, novedadesData] = await Promise.all([
       fetch('/content/sitio.json').then(r => r.json()),
       fetch('/content/sedes.json').then(r => r.json()),
       fetch('/content/programas.json').then(r => r.json()),
-      fetch('/content/galeria.json').then(r => r.json())
+      fetch('/content/galeria.json').then(r => r.json()),
+      fetch('/content/novedades.json').then(r => r.json())
     ]);
 
-    // ---- Hero ----
     document.querySelectorAll('[data-campo="hero_titulo"]').forEach(el => el.textContent = sitio.hero_titulo);
     document.querySelectorAll('[data-campo="hero_subtitulo"]').forEach(el => el.textContent = sitio.hero_subtitulo);
-    const heroImg = document.getElementById('hero-imagen');
-    if (heroImg && sitio.hero_imagen) heroImg.src = sitio.hero_imagen;
+
+    // ---- Hero (slideshow de hasta 3 fotos, sin imagen por defecto) ----
+    const heroBg = document.getElementById('hero-bg');
+    const heroImagenes = (sitio.hero_imagenes || []).filter(Boolean).slice(0, 3);
+    if (heroBg && heroImagenes.length) {
+      heroBg.innerHTML = heroImagenes.map((img, i) =>
+        `<img src="${img.imagen || img}" alt="" class="${i === 0 ? 'activa' : ''}">`
+      ).join('');
+      if (heroImagenes.length > 1) {
+        let indiceHero = 0;
+        setInterval(() => {
+          const imgs = heroBg.querySelectorAll('img');
+          imgs[indiceHero].classList.remove('activa');
+          indiceHero = (indiceHero + 1) % imgs.length;
+          imgs[indiceHero].classList.add('activa');
+        }, 5000);
+      }
+    }
 
     // ---- Nuestra diferencia ----
     document.querySelectorAll('[data-campo="diferencia_frase"]').forEach(el => el.textContent = sitio.diferencia_frase);
@@ -38,12 +54,40 @@ async function cargarContenido() {
     document.querySelectorAll('[data-campo="instagram_url"]').forEach(el => el.href = sitio.instagram_url);
     document.querySelectorAll('[data-campo="facebook_url"]').forEach(el => el.href = sitio.facebook_url);
 
-    // ---- Galería ----
-    const galeriaContenedor = document.getElementById('galeria-contenedor');
-    if (galeriaContenedor) {
-      galeriaContenedor.innerHTML = (galeriaData.fotos || []).map(f => `
-        <a href="${f.imagen}" target="_blank" rel="noopener"><img src="${f.imagen}" alt="${f.descripcion || ''}" loading="lazy"></a>
-      `).join('');
+    // ---- Carrusel de experiencia (horizontal) ----
+    const fotos = galeriaData.fotos || [];
+    const track = document.getElementById('carrusel-track');
+    const dotsCont = document.getElementById('carrusel-dots');
+    if (track && fotos.length) {
+      track.innerHTML = fotos.map(f => `<div><img src="${f.imagen}" alt="${f.descripcion || ''}" loading="lazy"></div>`).join('');
+      dotsCont.innerHTML = fotos.map((_, i) => `<span class="carrusel-dot${i === 0 ? ' activo' : ''}"></span>`).join('');
+      let indice = 0;
+      const mover = (i) => {
+        indice = (i + fotos.length) % fotos.length;
+        track.style.transform = `translateX(-${indice * 100}%)`;
+        dotsCont.querySelectorAll('.carrusel-dot').forEach((d, j) => d.classList.toggle('activo', j === indice));
+      };
+      document.getElementById('carrusel-prev').addEventListener('click', () => mover(indice - 1));
+      document.getElementById('carrusel-next').addEventListener('click', () => mover(indice + 1));
+    }
+
+    // ---- Carrusel vertical de novedades ----
+    const flyers = novedadesData.flyers || [];
+    const cvTrack = document.getElementById('cv-track');
+    const cvUp = document.getElementById('cv-up');
+    const cvDown = document.getElementById('cv-down');
+    if (cvTrack && flyers.length) {
+      cvTrack.innerHTML = flyers.map(f => `<img src="${f.imagen}" alt="" loading="lazy">`).join('');
+      const alturaItem = window.innerWidth <= 480 ? 158 : 208; // alto imagen + gap
+      let indiceV = 0;
+      const maxIndiceV = Math.max(0, flyers.length - 3);
+      const moverV = (i) => {
+        indiceV = Math.min(Math.max(i, 0), maxIndiceV);
+        cvTrack.style.transform = `translateY(-${indiceV * alturaItem}px)`;
+      };
+      if (flyers.length <= 3) { cvUp.style.display = 'none'; cvDown.style.display = 'none'; }
+      cvUp.addEventListener('click', () => moverV(indiceV - 1));
+      cvDown.addEventListener('click', () => moverV(indiceV + 1));
     }
 
     // ---- Sedes ----

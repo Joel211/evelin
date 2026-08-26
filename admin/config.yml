@@ -25,6 +25,19 @@ public_folder: "/images/uploads"
 
 collections:
 
+  - name: "novedades"
+    label: "Lo último de la academia"
+    files:
+      - file: "content/novedades.json"
+        label: "Flyers y novedades"
+        name: "novedades"
+        fields:
+          - label: "Flyers"
+            name: "flyers"
+            widget: "list"
+            fields:
+              - {label: "Imagen", name: "imagen", widget: "image"}
+
   - name: "sitio"
     label: "Textos generales del sitio"
     files:
@@ -33,7 +46,12 @@ collections:
         name: "sitio"
         fields:
           - {label: "Número de WhatsApp general (formulario y botón flotante)", name: "whatsapp_general", widget: "string"}
-          - {label: "Foto de portada (hero)", name: "hero_imagen", widget: "image"}
+          - label: "Fotos de portada (hero) — hasta 3, rotan automáticamente"
+            name: "hero_imagenes"
+            widget: "list"
+            max: 3
+            fields:
+              - {label: "Foto", name: "imagen", widget: "image"}
           - {label: "Título principal (hero)", name: "hero_titulo", widget: "string"}
           - {label: "Subtítulo (hero)", name: "hero_subtitulo", widget: "string"}
           - {label: "Foto de fondo 'Nuestra diferencia'", name: "diferencia_imagen", widget: "image"}
