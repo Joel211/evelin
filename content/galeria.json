@@ -1,8 +1,20 @@
 {
   "fotos": [
-    { "imagen": "/images/uploads/galeria-1.jpg", "descripcion": "Clase de Taekwondo" },
-    { "imagen": "/images/uploads/galeria-2.jpg", "descripcion": "Entrenamiento de Kickboxing" },
-    { "imagen": "/images/uploads/galeria-3.jpg", "descripcion": "Summer Camp" },
-    { "imagen": "/images/uploads/galeria-4.jpg", "descripcion": "Actividades Ninja" }
+    {
+      "imagen": "/images/uploads/valle_video_04.jpg",
+      "descripcion": "Clase de Taekwondo"
+    },
+    {
+      "imagen": "/images/uploads/valle_video_05.jpg",
+      "descripcion": "Entrenamiento de Kickboxing"
+    },
+    {
+      "imagen": "/images/uploads/valle_video_06.jpg",
+      "descripcion": "Summer Camp"
+    },
+    {
+      "imagen": "/images/uploads/galeria-4.jpg",
+      "descripcion": "Actividades Ninja"
+    }
   ]
 }
