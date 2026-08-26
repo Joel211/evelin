@@ -5,14 +5,14 @@
       "direccion": "PEGA_AQUI_LA_DIRECCION_EXACTA",
       "whatsapp_numero": "PEGA_AQUI_NUMERO_CHILLOS",
       "maps_url": "PEGA_AQUI_EL_LINK_DE_GOOGLE_MAPS",
-      "foto": "/images/uploads/sede-chillos.jpg"
+      "foto": "https://arriendayvende.com/wp-content/uploads/2021/08/2-15.jpg"
     },
     {
       "nombre": "Cumbayá",
       "direccion": "Frente a Paseo San Francisco",
       "whatsapp_numero": "PEGA_AQUI_NUMERO_CUMBAYA",
       "maps_url": "PEGA_AQUI_EL_LINK_DE_GOOGLE_MAPS",
-      "foto": "/images/uploads/sede-cumbaya.jpg"
+      "foto": "https://www.plusvalia.com/blog/wp-content/uploads/2025/07/cumbaya-ecuador-1.jpeg"
     }
   ]
 }
