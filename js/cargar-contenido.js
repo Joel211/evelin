@@ -9,23 +9,36 @@ function waLink(numero, mensaje) {
 
 async function cargarContenido() {
   try {
-    const [sitio, sedesData, programasData] = await Promise.all([
+    const [sitio, sedesData, programasData, galeriaData] = await Promise.all([
       fetch('/content/sitio.json').then(r => r.json()),
       fetch('/content/sedes.json').then(r => r.json()),
-      fetch('/content/programas.json').then(r => r.json())
+      fetch('/content/programas.json').then(r => r.json()),
+      fetch('/content/galeria.json').then(r => r.json())
     ]);
 
     // ---- Hero ----
     document.querySelectorAll('[data-campo="hero_titulo"]').forEach(el => el.textContent = sitio.hero_titulo);
     document.querySelectorAll('[data-campo="hero_subtitulo"]').forEach(el => el.textContent = sitio.hero_subtitulo);
+    const heroImg = document.getElementById('hero-imagen');
+    if (heroImg && sitio.hero_imagen) heroImg.src = sitio.hero_imagen;
 
     // ---- Nuestra diferencia ----
     document.querySelectorAll('[data-campo="diferencia_frase"]').forEach(el => el.textContent = sitio.diferencia_frase);
     document.querySelectorAll('[data-campo="diferencia_valores"]').forEach(el => el.textContent = sitio.diferencia_valores);
+    const diferenciaImg = document.getElementById('diferencia-imagen');
+    if (diferenciaImg && sitio.diferencia_imagen) diferenciaImg.src = sitio.diferencia_imagen;
 
     // ---- Redes sociales ----
     document.querySelectorAll('[data-campo="instagram_url"]').forEach(el => el.href = sitio.instagram_url);
     document.querySelectorAll('[data-campo="facebook_url"]').forEach(el => el.href = sitio.facebook_url);
+
+    // ---- Galería ----
+    const galeriaContenedor = document.getElementById('galeria-contenedor');
+    if (galeriaContenedor) {
+      galeriaContenedor.innerHTML = (galeriaData.fotos || []).map(f => `
+        <a href="${f.imagen}" target="_blank" rel="noopener"><img src="${f.imagen}" alt="${f.descripcion || ''}" loading="lazy"></a>
+      `).join('');
+    }
 
     // ---- Sedes ----
     const sedes = sedesData.sedes;
@@ -51,6 +64,12 @@ async function cargarContenido() {
     const selectSede = document.getElementById('sede');
     if (selectSede) {
       selectSede.innerHTML = sedes.map(s => `<option value="${s.nombre}">${s.nombre}</option>`).join('');
+    }
+
+    // Pie de página: lista de sedes
+    const footerSedes = document.getElementById('footer-sedes');
+    if (footerSedes) {
+      footerSedes.innerHTML = sedes.map(s => `<span>${s.nombre}</span>`).join('<span>|</span>');
     }
 
     // Botones flotantes / nav que abren el WhatsApp de una sede específica

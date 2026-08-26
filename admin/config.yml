@@ -32,12 +32,28 @@ collections:
         label: "Hero, diferencia y redes"
         name: "sitio"
         fields:
+          - {label: "Foto de portada (hero)", name: "hero_imagen", widget: "image"}
           - {label: "Título principal (hero)", name: "hero_titulo", widget: "string"}
           - {label: "Subtítulo (hero)", name: "hero_subtitulo", widget: "string"}
+          - {label: "Foto de fondo 'Nuestra diferencia'", name: "diferencia_imagen", widget: "image"}
           - {label: "Frase 'Nuestra diferencia'", name: "diferencia_frase", widget: "string"}
           - {label: "Valores (separados por ·)", name: "diferencia_valores", widget: "string"}
           - {label: "Enlace de Instagram", name: "instagram_url", widget: "string"}
           - {label: "Enlace de Facebook", name: "facebook_url", widget: "string"}
+
+  - name: "galeria"
+    label: "Galería de experiencia"
+    files:
+      - file: "content/galeria.json"
+        label: "Fotos de la galería"
+        name: "galeria"
+        fields:
+          - label: "Fotos"
+            name: "fotos"
+            widget: "list"
+            fields:
+              - {label: "Foto", name: "imagen", widget: "image"}
+              - {label: "Descripción", name: "descripcion", widget: "string"}
 
   - name: "sedes"
     label: "Sedes"

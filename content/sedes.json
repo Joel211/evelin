@@ -1,0 +1,18 @@
+{
+  "sedes": [
+    {
+      "nombre": "Valle de los Chillos",
+      "direccion": "PEGA_AQUI_LA_DIRECCION_EXACTA",
+      "whatsapp_numero": "PEGA_AQUI_NUMERO_CHILLOS",
+      "maps_url": "PEGA_AQUI_EL_LINK_DE_GOOGLE_MAPS",
+      "foto": "/images/uploads/sede-chillos.jpg"
+    },
+    {
+      "nombre": "Cumbayá",
+      "direccion": "Frente a Paseo San Francisco",
+      "whatsapp_numero": "PEGA_AQUI_NUMERO_CUMBAYA",
+      "maps_url": "PEGA_AQUI_EL_LINK_DE_GOOGLE_MAPS",
+      "foto": "/images/uploads/sede-cumbaya.jpg"
+    }
+  ]
+}
