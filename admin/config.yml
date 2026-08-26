@@ -45,6 +45,7 @@ collections:
         label: "Hero, diferencia y redes"
         name: "sitio"
         fields:
+          - {label: "Ícono del navegador (favicon)", name: "favicon", widget: "image"}
           - {label: "Número de WhatsApp general (formulario y botón flotante)", name: "whatsapp_general", widget: "string"}
           - label: "Fotos de portada (hero) — hasta 3, rotan automáticamente"
             name: "hero_imagenes"

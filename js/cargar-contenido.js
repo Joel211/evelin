@@ -20,6 +20,10 @@ async function cargarContenido() {
     document.querySelectorAll('[data-campo="hero_titulo"]').forEach(el => el.textContent = sitio.hero_titulo);
     document.querySelectorAll('[data-campo="hero_subtitulo"]').forEach(el => el.textContent = sitio.hero_subtitulo);
 
+    // ---- Favicon ----
+    const faviconLink = document.getElementById('favicon-link');
+    if (faviconLink && sitio.favicon) faviconLink.href = sitio.favicon;
+
     // ---- Hero (slideshow de hasta 3 fotos, sin imagen por defecto) ----
     const heroBg = document.getElementById('hero-bg');
     const heroImagenes = (sitio.hero_imagenes || []).filter(Boolean).slice(0, 3);
@@ -71,23 +75,23 @@ async function cargarContenido() {
       document.getElementById('carrusel-next').addEventListener('click', () => mover(indice + 1));
     }
 
-    // ---- Carrusel vertical de novedades ----
+    // ---- Novedades (fila horizontal, con scroll y flechas) ----
     const flyers = novedadesData.flyers || [];
-    const cvTrack = document.getElementById('cv-track');
-    const cvUp = document.getElementById('cv-up');
-    const cvDown = document.getElementById('cv-down');
-    if (cvTrack && flyers.length) {
-      cvTrack.innerHTML = flyers.map(f => `<img src="${f.imagen}" alt="" loading="lazy">`).join('');
-      const alturaItem = window.innerWidth <= 480 ? 158 : 208; // alto imagen + gap
-      let indiceV = 0;
-      const maxIndiceV = Math.max(0, flyers.length - 3);
-      const moverV = (i) => {
-        indiceV = Math.min(Math.max(i, 0), maxIndiceV);
-        cvTrack.style.transform = `translateY(-${indiceV * alturaItem}px)`;
+    const ncTrack = document.getElementById('nc-track');
+    const ncViewport = document.getElementById('nc-viewport');
+    const ncPrev = document.getElementById('nc-prev');
+    const ncNext = document.getElementById('nc-next');
+    if (ncTrack && flyers.length) {
+      ncTrack.innerHTML = flyers.map(f => `<img src="${f.imagen}" alt="" loading="lazy">`).join('');
+      const desplazar = (dir) => {
+        const item = ncTrack.querySelector('img');
+        if (!item) return;
+        const ancho = item.getBoundingClientRect().width + 12; // + gap
+        ncViewport.scrollBy({ left: dir * ancho, behavior: 'smooth' });
       };
-      if (flyers.length <= 3) { cvUp.style.display = 'none'; cvDown.style.display = 'none'; }
-      cvUp.addEventListener('click', () => moverV(indiceV - 1));
-      cvDown.addEventListener('click', () => moverV(indiceV + 1));
+      ncPrev.addEventListener('click', () => desplazar(-1));
+      ncNext.addEventListener('click', () => desplazar(1));
+      if (flyers.length <= 3) { ncPrev.style.display = 'none'; ncNext.style.display = 'none'; }
     }
 
     // ---- Sedes ----

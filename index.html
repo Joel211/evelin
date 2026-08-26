@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Danny Man Academy | Formamos campeones para la vida</title>
+<link id="favicon-link" rel="icon" href="">
 <meta name="description" content="Academia de Taekwondo y Kickboxing en Valle de los Chillos y Cumbayá. Agenda tu clase demostrativa gratuita.">
 
 <!-- =====================================================
@@ -152,10 +153,12 @@ fbq('track', 'PageView');
   /* ---------- 5. EXPERIENCIA / GALERÍA ---------- */
   .experiencia{background:var(--blanco);}
   .carrusel{position:relative;margin-top:32px;}
-  .carrusel-viewport{overflow:hidden;border-radius:var(--radius);}
+  .carrusel-viewport{overflow:hidden;border-radius:var(--radius);max-width:640px;margin:0 auto;}
+  .carrusel{max-width:640px;margin-top:32px;margin-left:auto;margin-right:auto;}
   .carrusel-track{display:flex;transition:transform .5s cubic-bezier(.2,.7,.3,1);}
   .carrusel-track > div{flex:0 0 100%;position:relative;}
-  .carrusel-track img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;}
+  .carrusel-track img{width:100%;aspect-ratio:16/10;max-height:360px;object-fit:cover;display:block;}
+  @media(max-width:700px){.carrusel-track img{aspect-ratio:4/3;max-height:260px;}}
   .carrusel-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(13,13,12,.7);display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
   .carrusel-nav:hover{background:var(--rojo);}
   .carrusel-nav svg{width:20px;height:20px;fill:#fff;}
@@ -220,17 +223,18 @@ fbq('track', 'PageView');
   .novedades{background:var(--negro);}
   .novedades .eyebrow{color:#FF6B7F;}
   .novedades-head{color:#fff;max-width:600px;margin-bottom:8px;}
-  .carrusel-vertical{position:relative;max-width:420px;margin:32px auto 0;}
-  .cv-viewport{overflow:hidden;height:624px;border-radius:var(--radius);}
-  @media(max-width:480px){.cv-viewport{height:474px;}}
-  .cv-track{display:flex;flex-direction:column;gap:8px;transition:transform .45s cubic-bezier(.2,.7,.3,1);}
-  .cv-track img{width:100%;height:200px;object-fit:cover;border-radius:10px;display:block;}
-  @media(max-width:480px){.cv-track img{height:150px;}}
-  .cv-nav{width:100%;display:flex;align-items:center;justify-content:center;background:var(--negro-2);border:1px solid var(--linea);}
-  .cv-nav svg{width:18px;height:18px;fill:var(--plata);transition:fill .2s ease;}
-  .cv-nav:hover svg{fill:#fff;}
-  .cv-up{border-radius:10px 10px 0 0;height:34px;margin-bottom:8px;}
-  .cv-down{border-radius:0 0 10px 10px;height:34px;margin-top:8px;}
+  .novedades-carrusel{position:relative;max-width:760px;margin:32px auto 0;}
+  .nc-viewport{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;}
+  .nc-viewport::-webkit-scrollbar{display:none;}
+  .nc-track{display:flex;gap:12px;}
+  .nc-track img{flex:0 0 calc((100% - 24px)/3);scroll-snap-align:start;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;}
+  @media(max-width:640px){.nc-track img{flex:0 0 calc((100% - 12px)/2);}}
+  .nc-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(13,13,12,.75);display:flex;align-items:center;justify-content:center;transition:background .2s ease;}
+  .nc-nav:hover{background:var(--rojo);}
+  .nc-nav svg{width:18px;height:18px;fill:#fff;}
+  .nc-prev{left:-14px;}
+  .nc-next{right:-14px;}
+  @media(max-width:820px){.nc-prev{left:6px;}.nc-next{right:6px;}}
 
   /* ---------- BOTONES: elevación en hover ---------- */
   .btn{transition:transform .18s ease, box-shadow .18s ease;}
@@ -329,12 +333,12 @@ fbq('track', 'PageView');
       <span class="eyebrow">Novedades</span>
       <h2 class="titulo-seccion">Lo último de la academia</h2>
     </div>
-    <div class="carrusel-vertical reveal">
-      <button class="cv-nav cv-up" id="cv-up" aria-label="Ver anterior"><svg viewBox="0 0 24 24"><polygon points="4,15 20,15 12,6"/></svg></button>
-      <div class="cv-viewport">
-        <div class="cv-track" id="cv-track"></div>
+    <div class="novedades-carrusel reveal">
+      <button class="nc-nav nc-prev" id="nc-prev" aria-label="Ver anterior"><svg viewBox="0 0 24 24"><polygon points="15,4 15,20 6,12"/></svg></button>
+      <div class="nc-viewport" id="nc-viewport">
+        <div class="nc-track" id="nc-track"></div>
       </div>
-      <button class="cv-nav cv-down" id="cv-down" aria-label="Ver siguiente"><svg viewBox="0 0 24 24"><polygon points="4,9 20,9 12,18"/></svg></button>
+      <button class="nc-nav nc-next" id="nc-next" aria-label="Ver siguiente"><svg viewBox="0 0 24 24"><polygon points="9,4 9,20 18,12"/></svg></button>
     </div>
   </div>
 </section>
