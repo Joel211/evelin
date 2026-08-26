@@ -1,13 +1,7 @@
 {
   "flyers": [
-    {
-      "imagen": "/images/uploads/ninja_actividad.jpg"
-    },
-    {
-      "imagen": "/images/uploads/summercamp_familia_comunidad.jpg"
-    },
-    {
-      "imagen": "/images/uploads/summercamp_futbol.jpg"
-    }
+    { "imagen": "/images/uploads/novedad-1.jpg" },
+    { "imagen": "/images/uploads/novedad-2.jpg" },
+    { "imagen": "/images/uploads/novedad-3.jpg" }
   ]
 }

@@ -82,11 +82,17 @@ async function cargarContenido() {
     const ncPrev = document.getElementById('nc-prev');
     const ncNext = document.getElementById('nc-next');
     if (ncTrack && flyers.length) {
-      ncTrack.innerHTML = flyers.map(f => `<img src="${f.imagen}" alt="" loading="lazy">`).join('');
+      ncTrack.innerHTML = flyers.map(f => `
+        <div class="nc-item">
+          <a href="${f.imagen}" target="_blank" rel="noopener">
+            <img src="${f.imagen}" alt="" loading="lazy">
+          </a>
+        </div>
+      `).join('');
       const desplazar = (dir) => {
-        const item = ncTrack.querySelector('img');
+        const item = ncTrack.querySelector('.nc-item');
         if (!item) return;
-        const ancho = item.getBoundingClientRect().width + 12; // + gap
+        const ancho = item.getBoundingClientRect().width + 22; // + gap
         ncViewport.scrollBy({ left: dir * ancho, behavior: 'smooth' });
       };
       ncPrev.addEventListener('click', () => desplazar(-1));
