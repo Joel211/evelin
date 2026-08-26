@@ -2,16 +2,16 @@
   "sedes": [
     {
       "nombre": "Valle de los Chillos",
-      "direccion": "PEGA_AQUI_LA_DIRECCION_EXACTA",
-      "whatsapp_numero": "PEGA_AQUI_NUMERO_CHILLOS",
+      "direccion": "Danny Man Academy",
+      "whatsapp_numero": "+593 98 943 3094",
       "maps_url": "https://maps.app.goo.gl/Q3KnfovNG6oW36X39",
       "foto": "https://arriendayvende.com/wp-content/uploads/2021/08/2-15.jpg"
     },
     {
       "nombre": "Cumbayá",
-      "direccion": "Frente a Paseo San Francisco",
-      "whatsapp_numero": "PEGA_AQUI_NUMERO_CUMBAYA",
-      "maps_url": "PEGA_AQUI_EL_LINK_DE_GOOGLE_MAPS",
+      "direccion": "Danny Man Academy",
+      "whatsapp_numero": "+593 98 943 3094",
+      "maps_url": "https://maps.app.goo.gl/Q3KnfovNG6oW36X39",
       "foto": "https://www.plusvalia.com/blog/wp-content/uploads/2025/07/cumbaya-ecuador-1.jpeg"
     }
   ]
