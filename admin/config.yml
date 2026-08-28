@@ -25,6 +25,28 @@ public_folder: "/images/uploads"
 
 collections:
 
+  - name: "horarios"
+    label: "Horarios por sede (formulario de clase demo)"
+    files:
+      - file: "content/horarios.json"
+        label: "Grupos y horarios"
+        name: "horarios"
+        fields:
+          - label: "Sedes"
+            name: "sedes"
+            widget: "list"
+            fields:
+              - {label: "Nombre de la sede (debe coincidir con 'Sedes')", name: "nombre", widget: "string"}
+              - {label: "Nota debajo del horario (ej. próxima inauguración)", name: "nota_horario", widget: "string", required: false}
+              - label: "Grupos / programas"
+                name: "grupos"
+                widget: "list"
+                fields:
+                  - {label: "Nombre del grupo (con edad)", name: "nombre", widget: "string"}
+                  - label: "Horarios disponibles"
+                    name: "horarios"
+                    widget: "list"
+
   - name: "novedades"
     label: "Lo último de la academia"
     files:

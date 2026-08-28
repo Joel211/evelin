@@ -9,12 +9,13 @@ function waLink(numero, mensaje) {
 
 async function cargarContenido() {
   try {
-    const [sitio, sedesData, programasData, galeriaData, novedadesData] = await Promise.all([
+    const [sitio, sedesData, programasData, galeriaData, novedadesData, horariosData] = await Promise.all([
       fetch('/content/sitio.json').then(r => r.json()),
       fetch('/content/sedes.json').then(r => r.json()),
       fetch('/content/programas.json').then(r => r.json()),
       fetch('/content/galeria.json').then(r => r.json()),
-      fetch('/content/novedades.json').then(r => r.json())
+      fetch('/content/novedades.json').then(r => r.json()),
+      fetch('/content/horarios.json').then(r => r.json())
     ]);
 
     document.querySelectorAll('[data-campo="hero_titulo"]').forEach(el => el.textContent = sitio.hero_titulo);
@@ -124,6 +125,52 @@ async function cargarContenido() {
     const selectSede = document.getElementById('sede');
     if (selectSede) {
       selectSede.innerHTML = sedes.map(s => `<option value="${s.nombre}">${s.nombre}</option>`).join('');
+    }
+
+    // ---- Selects encadenados: sede -> programa/grupo -> horario ----
+    const selectPrograma = document.getElementById('programa');
+    const selectHorario = document.getElementById('horario');
+    const notaCont = document.getElementById('horario-nota');
+    const notaLink = document.getElementById('horario-nota-link');
+    const sedesHorarios = (horariosData && horariosData.sedes) || [];
+
+    function actualizarGrupos() {
+      const sedeInfo = sedesHorarios.find(s => s.nombre === selectSede.value);
+      const grupos = (sedeInfo && sedeInfo.grupos) || [];
+      selectPrograma.innerHTML = grupos.length
+        ? grupos.map(g => `<option value="${g.nombre}">${g.nombre}</option>`).join('')
+        : '<option value="">No hay grupos configurados</option>';
+
+      if (sedeInfo && sedeInfo.nota_horario) {
+        notaLink.textContent = sedeInfo.nota_horario;
+        notaLink.setAttribute('data-mensaje', `Hola, quiero consultar por otro horario en la sede ${sedeInfo.nombre}`);
+        notaCont.style.display = 'block';
+      } else {
+        notaCont.style.display = 'none';
+      }
+      actualizarHorarios();
+    }
+
+    function actualizarHorarios() {
+      const sedeInfo = sedesHorarios.find(s => s.nombre === selectSede.value);
+      const grupoInfo = sedeInfo && (sedeInfo.grupos || []).find(g => g.nombre === selectPrograma.value);
+      const horarios = (grupoInfo && grupoInfo.horarios) || [];
+      selectHorario.innerHTML = horarios.length
+        ? horarios.map(h => `<option value="${h}">${h}</option>`).join('')
+        : '<option value="">Consultar disponibilidad</option>';
+    }
+
+    if (selectSede && selectPrograma && selectHorario && sedesHorarios.length) {
+      selectSede.addEventListener('change', actualizarGrupos);
+      selectPrograma.addEventListener('change', actualizarHorarios);
+      if (notaLink) {
+        notaLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          const mensaje = this.getAttribute('data-mensaje') || 'Hola, quiero consultar por otro horario';
+          window.open(waLink(window._whatsappGeneral, mensaje), '_blank');
+        });
+      }
+      actualizarGrupos(); // estado inicial con la primera sede
     }
 
     // Pie de página: lista de sedes

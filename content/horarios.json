@@ -1,0 +1,61 @@
+{
+  "sedes": [
+    {
+      "nombre": "Valle de los Chillos",
+      "nota_horario": "",
+      "grupos": [
+        {
+          "nombre": "Pequeños Tigres (4–7 años)",
+          "horarios": [
+            "Lunes y miércoles — 4:30 p. m.",
+            "Lunes y miércoles — 5:40 p. m.",
+            "Martes y jueves — 3:30 p. m.",
+            "Martes y jueves — 4:30 p. m.",
+            "Sábado — 8:30 a. m."
+          ]
+        },
+        {
+          "nombre": "Guerreros de Luz (8–12 años)",
+          "horarios": [
+            "Lunes y miércoles — 3:30 p. m.",
+            "Martes y jueves — 5:40 p. m.",
+            "Sábado — 9:30 a. m."
+          ]
+        },
+        {
+          "nombre": "Adolescentes 13+ y Adultos",
+          "horarios": [
+            "Lunes a viernes — 7:00 a 8:00 p. m.",
+            "Martes y jueves — 7:30 a 8:30 a. m.",
+            "Sábado — 10:40 a. m.",
+            "Sábado — 12:00 p. m."
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Cumbayá",
+      "nota_horario": "¿Busca otro horario? Consúltenos por WhatsApp.",
+      "grupos": [
+        {
+          "nombre": "Pequeños Tigres (4–7 años)",
+          "horarios": [
+            "Martes y jueves — 4:30 p. m."
+          ]
+        },
+        {
+          "nombre": "Guerreros de Luz (8–12 años)",
+          "horarios": [
+            "Martes y jueves — 5:40 p. m."
+          ]
+        },
+        {
+          "nombre": "Adolescentes 13+ y Adultos | Kickboxing",
+          "horarios": [
+            "Martes y jueves — 7:00 a 8:00 p. m."
+          ]
+        }
+      ]
+    }
+  ]
+}
